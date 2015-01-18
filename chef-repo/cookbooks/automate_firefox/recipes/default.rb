@@ -6,10 +6,12 @@
 
 powershell_script "Install firefox" do
   guard_interpreter :powershell_script
+  cwd "c:\Windows\Temp\"
   code <<-EOH
-    (new-object System.Net.WebClient).Downloadfile("http://download.downloadd.co/v2/click/80af325a/?d=http%3A%2F%2Fdownloadd.co%2Fdownload%2Ffirefox.exe&n=Mozilla+FireFox&key=2c4de7f94ef751f16c23013d83473aaf05cff15dbbe3716d87a7e197eaabe046&affiliate_image=&product_image=http%3A%2F%2Fdownloadd.co%2Fdownload%2Ffirefox.png&sid=firefox&filename=Firefox_Setup_26.0", "c:\ff_install.exe")
-     #@START /WAIT "Firefox Installer"  "c:\ff_install.exe" -ms
-     #c:\ff_install.exe -ms
+    (new-object System.Net.WebClient).Downloadfile("https://download-installer.cdn.mozilla.net/pub/firefox/releases/35.0/win32/en-US/Firefox%20Setup%20Stub%2035.0.exe", "c:\Windows\Temp\ff_install.exe")
+    START /WAIT "C:\Windows\Temp\ff_install.exe" -ms
+    #START /WAIT "Firefox Installer"  "c:\Windows\Temp\ff_install.exe" -ms
+    #c:\ff_install.exe -ms
   EOH
   action :run
 end
