@@ -17,3 +17,7 @@ windows_package "Install Firefox" do
   source "#{Chef::Config[:file_cache_path]}\\ff_install.msi"
   action :install
 end
+
+template 'C:\Users\Administrator\AppData\Roaming\Mozilla\Firefox\Profiles\laxn2nh5.default\prefs.js' do
+  source 'prefs.js.erb'
+end
